@@ -40,7 +40,6 @@ namespace TaskProjects.Api.Modules.GlobalException
                 };
 
                 await JsonSerializer.SerializeAsync(context.Response.Body, response);
-
             }
         }
     }

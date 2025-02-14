@@ -16,7 +16,11 @@ builder.Services.AddInjection(builder.Configuration);
 
 builder.Services.AddSwaggerGen();
 
+string myPolicy = "PolicyApiEcommerce";
 
+builder.Services.AddCors(options => options.AddPolicy(myPolicy, builder => builder.AllowAnyOrigin()
+                                                                               .AllowAnyHeader()
+                                                                               .AllowAnyMethod()));
 
 var app = builder.Build();
 
@@ -25,7 +29,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors(myPolicy);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

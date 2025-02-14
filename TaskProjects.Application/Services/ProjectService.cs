@@ -88,13 +88,13 @@ namespace TaskProjects.Application.Services
             return response;
         }
 
-        public ResponsePagination<IEnumerable<ProjectDto>> GetAllWithPagination(int pageNumber, int pageSize)
+        public ResponsePagination<IEnumerable<ProjectDto>> GetAllWithPagination(int pageNumber, int pageSize, string userId)
         {
             ResponsePagination<IEnumerable<ProjectDto>> response = new ResponsePagination<IEnumerable<ProjectDto>>();
 
             var count = _repoProject.Count();
 
-            var projects = _repoProject.GetAllWithPagination(pageNumber, pageSize);
+            var projects = _repoProject.GetAllWithPagination(pageNumber, pageSize, userId);
 
             response.Data = _mapper.Map<IEnumerable<ProjectDto>>(projects);
 

@@ -14,7 +14,7 @@ namespace TaskProjects.Interfaces.Persistence
         bool Delete(string id);
         T Get(string id);
         IEnumerable<T> GetAll();
-        IEnumerable<T> GetAllWithPagination(int pageNumber, int pageSize);
+        IEnumerable<T> GetAllWithPagination(int pageNumber, int pageSize , string userId);
         int Count();
 
         #endregion
@@ -26,8 +26,9 @@ namespace TaskProjects.Interfaces.Persistence
         Task<bool> DeleteAsync(string id);
         Task<T> GetAsync(string id);
         Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> GetAllWithPaginationAsync(int pageNumber, int pageSize);
+        Task<IEnumerable<T>> GetAllWithPaginationAsync(int pageNumber, int pageSize, string userId);
         Task<int> CountAsync();
+        
         #endregion
     }
 }

@@ -41,5 +41,12 @@ namespace TaskProjects.Api.Controllers
             var insertProject = _projectService.Update(projectDto);
             return Ok(insertProject);
         }
+
+        [HttpGet("GetAllPagination/{pageNumber}/{pageSize}/{userCreate}")]
+        public IActionResult GetAllWithPagination(int pageNumber, int pageSize, string userCreate)
+        {
+            var result = _projectService.GetAllWithPagination(pageNumber, pageSize, userCreate);
+            return Ok(result);
+        }
     }
 }

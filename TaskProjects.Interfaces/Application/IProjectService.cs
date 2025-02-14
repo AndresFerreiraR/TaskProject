@@ -16,7 +16,7 @@ namespace TaskProjects.Interfaces.Application
         Response<bool> Delete(string id);
         Response<ProjectDto> Get(string id);
         Response<IEnumerable<ProjectDto>> GetAll();
-        ResponsePagination<IEnumerable<ProjectDto>> GetAllWithPagination(int pageNumber, int pageSize);
+        ResponsePagination<IEnumerable<ProjectDto>> GetAllWithPagination(int pageNumber, int pageSize, string userId);
 
         #endregion
 

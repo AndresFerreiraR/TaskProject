@@ -114,13 +114,15 @@ namespace TaskProjects.Persistence.Repositories
             }
         }
 
-        public IEnumerable<Project> GetAllWithPagination(int pageNumber, int pageSize)
+        public IEnumerable<Project> GetAllWithPagination(int pageNumber, int pageSize, string userId)
         {
             try
             {
+                Guid user = Guid.Parse(userId);
                 var projects = _efContex.Projects
                                         .Skip((pageNumber - 1) * pageSize)
-                                        .Take(pageSize).ToList();
+                                        .Take(pageSize)
+                                        .ToList();
 
                 return projects;
             }
@@ -174,7 +176,7 @@ namespace TaskProjects.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Project>> GetAllWithPaginationAsync(int pageNumber, int pageSize)
+        public Task<IEnumerable<Project>> GetAllWithPaginationAsync(int pageNumber, int pageSize, string userId)
         {
             throw new NotImplementedException();
         }
