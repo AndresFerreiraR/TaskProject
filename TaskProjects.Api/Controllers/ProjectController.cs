@@ -48,5 +48,12 @@ namespace TaskProjects.Api.Controllers
             var result = _projectService.GetAllWithPagination(pageNumber, pageSize, userCreate);
             return Ok(result);
         }
+
+        [HttpDelete("{projectId}")]
+        public IActionResult Delete(string projectId)
+        {
+            var insertProject = _projectService.Delete(projectId);
+            return Ok(insertProject);
+        }
     }
 }

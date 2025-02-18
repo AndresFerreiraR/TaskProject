@@ -58,8 +58,8 @@ namespace TaskProjects.Application.Services
         public Response<bool> Delete(string id)
         {
             Response<bool> response = new Response<bool>();
-            _repoProject.Delete(id);
-            response.IsSuccess = true;
+            var repoResponse = _repoProject.Delete(id);
+            response.IsSuccess = repoResponse;
             response.Message = "";
 
             return response;
