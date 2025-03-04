@@ -62,10 +62,10 @@ jobs:
       - name: 📂 Verificar archivos en el directorio de publicación
         run: ls -la "${{ env.PACKAGE_NAME }}"
         
-      - name: 🗜️ Generate .Zip file
+      - name: 🗜️ Generar archivo .zip
         run: |
-          cd "${{ env.PACKAGE_NAME }}"
-          zip -r ../deploy.zip
+         cd "${{ env.PACKAGE_NAME }}"
+         zip -r ../deploy.zip .
 
       - name: ⬆️ Publish Artifacts
         uses: actions/upload-artifact@v4
