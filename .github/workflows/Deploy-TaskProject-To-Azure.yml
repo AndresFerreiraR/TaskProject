@@ -66,19 +66,6 @@ jobs:
 
       - name: 💩 Merida
         run: ls ${{ github.workspace }}
-
-      - name: 🔍 Verificar existencia del archivo ZIP
-        run: |
-         echo "📂 Directorio actual: $(pwd)"
-         echo "📂 Otro actual: ${{ github.workspace }}"
-         echo "📂 Otro actual: ${{ github.workspace }}/TaskProjects.Api"
-         ls -lah  # Muestra los archivos en el directorio actual
-         if [ -f "deploy.zip" ]; then
-         echo "✅ QuePutas.zip encontrado."
-         else
-         echo "❌ ERROR: QuePutas.zip no se generó correctamente."
-         exit 1
-         fi
           
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
