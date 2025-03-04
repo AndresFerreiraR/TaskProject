@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: ${{ github.workspace }}/deploy.zip
+          path: ${{ github.workspace }}/QuePutas.zip
 
   deploy:
     runs-on: ubuntu-latest
