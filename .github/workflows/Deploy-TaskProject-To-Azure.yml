@@ -1,0 +1,91 @@
+# This workflow will build and push a .NET Core app to an Azure Web App when a commit is pushed to your default branch.
+#
+# This workflow assumes you have already created the target Azure App Service web app.
+# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net60&pivots=development-environment-vscode
+#
+# To configure this workflow:
+#
+# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
+#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
+#
+# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
+#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
+#
+# 3. Change the value for the AZURE_WEBAPP_NAME. Optionally, change the AZURE_WEBAPP_PACKAGE_PATH and DOTNET_VERSION environment variables below.
+#
+# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
+# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+
+name: Build and deploy TaskProject ASP.Net Core API to an Azure API App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AZURE_APIAPP_NAME: TaskManagementProject
+  PACKAGE_NAME: TaskProjects.Api/publish
+  BUILD_CONFIG: Release
+  DOTNET_VERSION: 8.0.X
+  WORKING_DIRECTORY: TaskProjects.Api
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: main
+
+    steps:
+      - name: 🛒 Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 🏗️ Restore dependencies
+        run: dotnet restore "${{ enve.WORKING_DIRECTORY }}"
+
+      - name: 🔨 Build Project
+        run: dotnet build "${{ enve.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-restore
+
+      - name: ✅ Run Unit Test
+        run: dotnet test "${{ enve.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-build --no-restore
+
+      - name: 🛫 Generate Publish
+        run: dotnet publish "${{ enve.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
+
+      - name: 🗜️ Generate .Zip file
+        run: |
+          cd ${{ env.PACKAGE_NAME }}
+          zip -r ../deploy.zip
+
+      - name: ⬆️ Publish Artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+          name: zipDeploy
+          path: deploy.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: main
+    
+    steps:
+    
+      - name: ⬇️ Download artifact from buil job
+        uses: actions/download-artifact@v4
+        with:
+          name: zipDeploy
+          
+      - name: 🚀 Deploy in Azure API App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_APIAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_TP_APIAPP_PUBLISH_PROFILE }}
+          package: deploy.zip
+  
