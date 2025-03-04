@@ -67,10 +67,10 @@ jobs:
          cd "${{ env.PACKAGE_NAME }}"
          zip -r ../deploy.zip .
 
-      - name: ⬆️ Publish Artifacts
+      - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
-        with: 
-          name: zipDeploy
+        with:
+          name: dotnet-app
           path: deploy.zip
 
   deploy:
@@ -83,7 +83,7 @@ jobs:
       - name: ⬇️ Download artifact from buil job
         uses: actions/download-artifact@v4
         with:
-          name: zipDeploy
+          name: dotnet-app
           
       - name: 🚀 Deploy in Azure API App
         uses: azure/webapps-deploy@v2
