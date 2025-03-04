@@ -74,9 +74,9 @@ jobs:
          echo "📂 Otro actual: ${{ github.workspace }}/TaskProjects.Api"
          ls -lah  # Muestra los archivos en el directorio actual
          if [ -f "deploy.zip" ]; then
-         echo "✅ deploy.zip encontrado."
+         echo "✅ QuePutas.zip encontrado."
          else
-         echo "❌ ERROR: deploy.zip no se generó correctamente."
+         echo "❌ ERROR: QuePutas.zip no se generó correctamente."
          exit 1
          fi
           
