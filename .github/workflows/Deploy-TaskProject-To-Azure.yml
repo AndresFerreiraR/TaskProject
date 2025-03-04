@@ -62,10 +62,10 @@ jobs:
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         zip -r ../QuePutas.zip .
+         zip -r ../../QuePutas.zip .
 
       - name: 💩 Merida
-        run: ls ${{ github.workspace }}/TaskProjects.Api
+        run: ls ${{ github.workspace }}
 
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
