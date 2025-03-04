@@ -60,10 +60,16 @@ jobs:
         run: dotnet publish "${{ env.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
 
         
+      - name: 🔍 Mostrar contenido antes de generar el ZIP
+        run: ls -R "${{ github.workspace }}/TaskProjects.Api/publish"
+
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
+         pwd  # 📌 Muestra la ruta actual para confirmar dónde estamos
+         ls -la  # 📌 Lista archivos antes de crear el ZIP
          zip -r ../deploy.zip .
+         ls -la ../  # 📌 Lista archivos después de crear el ZIP
 
 
       - name: 🔍 Verificar existencia del archivo ZIP
