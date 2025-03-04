@@ -71,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: ${{ env.PACKAGE_NAME }}/deploy.zip
+          path: ${{ github.workspace }}/deploy.zip
 
       - name: Listar artefactos disponibles
         run: ls -R ${{ github.workspace }}
