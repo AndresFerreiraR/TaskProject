@@ -62,12 +62,13 @@ jobs:
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         zip -r ../QuePutas.zip .
+         zip -r ../../QuePutas.zip .
 
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
          echo "📂 Directorio actual: $(pwd)"
          echo "📂 Otro actual: ${{ github.workspace }}"
+         echo "📂 Otro actual: ${{ github.workspace }}/TaskProjects.Api"
          ls -lah  # Muestra los archivos en el directorio actual
          if [ -f "deploy.zip" ]; then
          echo "✅ deploy.zip encontrado."
