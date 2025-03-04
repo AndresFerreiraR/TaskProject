@@ -59,6 +59,9 @@ jobs:
       - name: 🛫 Generate Publish
         run: dotnet publish "${{ env.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
 
+      - name: 📂 Verificar archivos en el directorio de publicación
+        run: ls -la "${{ env.PACKAGE_NAME }}"
+        
       - name: 🗜️ Generate .Zip file
         run: |
           cd ${{ env.PACKAGE_NAME }}
