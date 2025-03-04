@@ -66,16 +66,13 @@ jobs:
          zip -r ../deploy.zip .
 
       - name: List output directory
-        run: ls -R TaskProjects.Api/publish
+        run: ls -R ${{ github.workspace }}
           
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
           path: deploy.zip
-
-      - name: Listar artefactos disponibles
-        run: ls -R ${{ github.workspace }}
 
   deploy:
     runs-on: ubuntu-latest
