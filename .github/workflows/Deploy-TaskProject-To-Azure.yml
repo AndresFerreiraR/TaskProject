@@ -65,7 +65,7 @@ jobs:
          zip -r ./QuePutas.zip .
 
       - name: 💩 Merida
-        run: ls ${{ github.workspace }}/TaskProjects.Api
+        run: ls ${{ github.workspace }}/TaskProjects.Api/publish
 
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
