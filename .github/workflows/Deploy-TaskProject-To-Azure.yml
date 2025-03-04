@@ -59,27 +59,14 @@ jobs:
       - name: 🛫 Generate Publish
         run: dotnet publish "${{ env.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
 
-        
-      - name: 🔍 Mostrar contenido antes de generar el ZIP
-        run: ls -R "${{ github.workspace }}/TaskProjects.Api/publish"
 
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         pwd  # 📌 Muestra la ruta actual para confirmar dónde estamos
-         ls -la  # 📌 Lista archivos antes de crear el ZIP
          zip -r ../deploy.zip .
-         ls -la ../  # 📌 Lista archivos después de crear el ZIP
 
-
-      - name: 🔍 Verificar existencia del archivo ZIP
-        run: |
-         if [ -f "deploy.zip" ]; then
-         echo "✅ deploy.zip encontrado."
-         else
-         echo "❌ ERROR: deploy.zip no se generó correctamente."
-         exit 1
-         fi
+      - name: List output directory
+        run: ls -R TaskProjects.Api/publish
           
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
