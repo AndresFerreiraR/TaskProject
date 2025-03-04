@@ -73,6 +73,9 @@ jobs:
           name: dotnet-app
           path: deploy.zip
 
+      - name: Listar artefactos disponibles
+        run: ls -R ${{ github.workspace }}
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
