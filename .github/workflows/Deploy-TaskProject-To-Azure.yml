@@ -63,6 +63,15 @@ jobs:
         run: |
          cd "${{ env.PACKAGE_NAME }}"
          zip -r ../QuePutas.zip .
+
+      - name: 🔍 Verificar existencia del archivo ZIP
+        run: |
+         if [ -f "QuePutas.zip" ]; then
+         echo "✅ deploy.zip encontrado."
+         else
+         echo "❌ ERROR: deploy.zip no se generó correctamente."
+         exit 1
+         fi
           
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
