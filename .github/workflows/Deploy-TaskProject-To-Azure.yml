@@ -62,16 +62,13 @@ jobs:
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         zip -r ../../QuePutas.zip .
-
-      - name: 💩 Merida
-        run: ls ${{ github.workspace }}
+         zip -r ../../Deploy.zip .
           
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dotnet-app
-          path: QuePutas.zip
+          name: dotnet-api
+          path: Deploy.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -83,12 +80,12 @@ jobs:
       - name: ⬇️ Download artifact from buil job
         uses: actions/download-artifact@v4
         with:
-          name: dotnet-app
+          name: dotnet-api
           
       - name: 🚀 Deploy in Azure API App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_APIAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_TP_APIAPP_PUBLISH_PROFILE }}
-          package: QuePutas.zip
+          package: Deploy.zip
   
