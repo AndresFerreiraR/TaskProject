@@ -51,13 +51,13 @@ jobs:
         run: dotnet restore "${{ enve.WORKING_DIRECTORY }}"
 
       - name: 🔨 Build Project
-        run: dotnet build "${{ enve.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-restore
+        run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-restore
 
       - name: ✅ Run Unit Test
-        run: dotnet test "${{ enve.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-build --no-restore
+        run: dotnet test "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.BUILD_CONFIG }} --no-build --no-restore
 
       - name: 🛫 Generate Publish
-        run: dotnet publish "${{ enve.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
+        run: dotnet publish "${{ env.WORKING_DIRECTORY }}" -c ${{ env.BUILD_CONFIG }} -o "${{ env.PACKAGE_NAME }}" --no-build --no-restore
 
       - name: 🗜️ Generate .Zip file
         run: |
