@@ -66,7 +66,9 @@ jobs:
 
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
-         if [ -f "QuePutas.zip" ]; then
+         echo "📂 Directorio actual: $(pwd)"
+         ls -lah  # Muestra los archivos en el directorio actual
+         if [ -f "deploy.zip" ]; then
          echo "✅ deploy.zip encontrado."
          else
          echo "❌ ERROR: deploy.zip no se generó correctamente."
