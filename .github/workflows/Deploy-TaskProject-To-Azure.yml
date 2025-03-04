@@ -62,7 +62,7 @@ jobs:
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         zip -r ../../QuePutas.zip .
+         zip -r ./QuePutas.zip .
 
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
