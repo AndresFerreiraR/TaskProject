@@ -67,11 +67,21 @@ jobs:
          cd "${{ env.PACKAGE_NAME }}"
          zip -r ../deploy.zip .
 
+
+      - name: 🔍 Verificar existencia del archivo ZIP
+        run: |
+          if [ -f "deploy.zip" ]; then
+          echo "✅ deploy.zip encontrado."
+          else
+          echo "❌ ERROR: deploy.zip no se generó correctamente."
+          exit 1
+          fi
+          
       - name: ⬆️ Upload the zip in artifact
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: deploy.zip
+          path: ./deploy.zip
 
       - name: Listar artefactos disponibles
         run: ls -R ${{ github.workspace }}
@@ -87,7 +97,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dotnet-app
-          path: .
           
       - name: 🚀 Deploy in Azure API App
         uses: azure/webapps-deploy@v2
