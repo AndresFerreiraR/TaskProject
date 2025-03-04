@@ -64,7 +64,7 @@ jobs:
         
       - name: 🗜️ Generate .Zip file
         run: |
-          cd ${{ env.PACKAGE_NAME }}
+          cd "${{ env.PACKAGE_NAME }}"
           zip -r ../deploy.zip
 
       - name: ⬆️ Publish Artifacts
