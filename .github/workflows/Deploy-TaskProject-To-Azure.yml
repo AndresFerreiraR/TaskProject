@@ -71,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: ${{ github.workspace }}/deploy.zip
+          path: deploy.zip
 
       - name: Listar artefactos disponibles
         run: ls -R ${{ github.workspace }}
@@ -87,7 +87,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dotnet-app
-          path: deploy.zip
+          path: .
           
       - name: 🚀 Deploy in Azure API App
         uses: azure/webapps-deploy@v2
