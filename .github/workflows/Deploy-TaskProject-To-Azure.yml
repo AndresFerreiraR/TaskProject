@@ -67,6 +67,7 @@ jobs:
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
          echo "📂 Directorio actual: $(pwd)"
+         echo "📂 Otro actual: ${{ github.workspace }}"
          ls -lah  # Muestra los archivos en el directorio actual
          if [ -f "deploy.zip" ]; then
          echo "✅ deploy.zip encontrado."
