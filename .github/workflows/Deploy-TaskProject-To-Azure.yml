@@ -64,6 +64,9 @@ jobs:
          cd "${{ env.PACKAGE_NAME }}"
          zip -r ./QuePutas.zip .
 
+      - name: 💩 Merida
+        run: ls ${{ github.workspace }}/TaskProjects.Api
+
       - name: 🔍 Verificar existencia del archivo ZIP
         run: |
          echo "📂 Directorio actual: $(pwd)"
