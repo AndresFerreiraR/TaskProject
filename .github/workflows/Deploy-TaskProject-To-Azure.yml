@@ -63,7 +63,7 @@ jobs:
       - name: 🗜️ Generar archivo .zip
         run: |
          cd "${{ env.PACKAGE_NAME }}"
-         zip -r ../deploy.zip .
+         zip -r ../QuePutas.zip .
 
       - name: List output directory
         run: ls -R ${{ github.workspace }}
